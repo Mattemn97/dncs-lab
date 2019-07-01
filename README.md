@@ -4,10 +4,10 @@ _Author_: **Filippini Matteo** Mat. 186426
 
 _Description_: This repository contains the Vagrant files and the scripts required to run the virtual lab environment used in the DNCS course.
 
-_Assignment_: Based the V​agrantfile ​and the provisioning scripts available at: https://github.com/dustnic/dncs-lab​ the candidate is required to design a functioning network where any host configured and attached to​ r​outer-1​ (through ​switch​) can browse a website hosted on host-C-2.
+_Assignment_: Based the Vagrantfile and the provisioning scripts available at: https://github.com/dustnic/dncs-lab the candidate is required to design a functioning network where any host configured and attached to router-1 (through switch) can browse a website hosted on host-C-2.
 The subnetting needs to be designed to accommodate the following requirement (no need to create more hosts than the one described in the vagrantfile):
-- Up to 130 hosts in the same subnet of ​host-A-1
-- Up to 25 hosts in the same subnet of h​ost-B-1
+- Up to 130 hosts in the same subnet of host-A-1
+- Up to 25 hosts in the same subnet of host-B-1
 - Consume as few IP addresses as possible
 
 
