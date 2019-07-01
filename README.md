@@ -80,16 +80,16 @@ Two different VLANs allow `router-1` to connect two different subnets via unique
 
 ### Interface-IP mapping
 
-| Device   | | Interface | | IP                | | Subnet |
-| -------- | | --------- | | ----------------- | | ------ |
-| host-A-1 | | eth1      | | 10.0.50.1/24      | | A      |
-| router-1 | | eth1.50   | | 10.0.50.254/24    | | A      |
-| host-B-1 | | eth1      | | 10.0.20.1/27      | | B      |
-| router-1 | | eth1.20   | | 10.0.20.30/27     | | B      |
-| host-C-2 | | eth1      | | 10.0.80.1/30      | | C      |
-| router-2 | | eth1      | | 10.0.80.2/30      | | C      |
-| router-1 | | eth2      | | 172.16.255.253/30 | | D      |
-| router-2 | | eth2      | | 172.16.255.254/30 | | D      |
+| Device   | Interface | IP                | Subnet |
+| -------- | --------- | ----------------- | ------ |
+| host-A-1 | eth1      | 10.0.50.1/24      | A      |
+| router-1 | eth1.50   | 10.0.50.254/24    | A      |
+| host-B-1 | eth1      | 10.0.20.1/27      | B      |
+| router-1 | eth1.20   | 10.0.20.30/27     | B      |
+| host-C-2 | eth1      | 10.0.80.1/30      | C      |
+| router-2 | eth1      | 10.0.80.2/30      | C      |
+| router-1 | eth2      | 172.16.255.253/30 | D      |
+| router-2 | eth2      | 172.16.255.254/30 | D      |
 
 
 ### Vagrant file and provisioning scripts
