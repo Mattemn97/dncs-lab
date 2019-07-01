@@ -1,9 +1,6 @@
-<<<<<<< HEAD
 # DNCS-LAB | Assignment
 
 _Author_: **Filippini Matteo** Mat. 186426
-
-University of Trento - Information and Communication Engineering
 
 _Description_: This repository contains the Vagrant files and the scripts required to run the virtual lab environment used in the DNCS course.
 
@@ -64,13 +61,13 @@ The subnetting needs to be designed to accommodate the following requirement (no
 
 The network is divided in 4 different subnets:
 
--   **A** including `host-A-1` and `router-1`. The subnet is a /24 so you can get IP addresses for 254 different hosts (130 minimum required)
+-   **A** including `host-A-1` and `router-1`. The subnet is a /24 so you can get IP addresses for 2<sup>32-24</sup>-2 = 254 different hosts (130 minimum required)
 
--   **B** including `host-A-1` and `router-1`. The subnet is a /27 so you can get IP addresses for 30 different hosts (25 minimum required)
+-   **B** including `host-A-1` and `router-1`. The subnet is a /27 so you can get IP addresses for 2<sup>32-27</sup>-2 = 30 different hosts (25 minimum required)
 
--   **C** including `router-1` and `router-2`. The subnet is a /30 so you can get IP addresses for 2 different hosts
+-   **C** including `router-1` and `router-2`. The subnet is a /30 so you can get IP addresses for 2<sup>32-30</sup>-2 = 2 different hosts
 
--   **D** including `router-2` and `host-C-2`. The subnet is a /30 so you can get IP addresses for 2 different hosts
+-   **D** including `router-2` and `host-C-2`. The subnet is a /30 so you can get IP addresses for 2<sup>32-30</sup>-2 = 2 different hosts
 
 ### VLANs
 
@@ -83,16 +80,16 @@ Two different VLANs allow `router-1` to connect two different subnets via unique
 
 ### Interface-IP mapping
 
-| Device   | Interface | IP                | Subnet |
-| -------- | --------- | ----------------- | ------ |
-| host-A-1 | eth1      | 10.0.50.1/24      | A      |
-| router-1 | eth1.50   | 10.0.50.254/24    | A      |
-| host-B-1 | eth1      | 10.0.20.1/27      | B      |
-| router-1 | eth1.20   | 10.0.20.30/27     | B      |
-| host-C-2 | eth1      | 10.0.80.1/30      | C      |
-| router-2 | eth1      | 10.0.80.2/30      | C      |
-| router-1 | eth2      | 172.16.255.253/30 | D      |
-| router-2 | eth2      | 172.16.255.254/30 | D      |
+| Device   | | Interface | | IP                | | Subnet |
+| -------- | | --------- | | ----------------- | | ------ |
+| host-A-1 | | eth1      | | 10.0.50.1/24      | | A      |
+| router-1 | | eth1.50   | | 10.0.50.254/24    | | A      |
+| host-B-1 | | eth1      | | 10.0.20.1/27      | | B      |
+| router-1 | | eth1.20   | | 10.0.20.30/27     | | B      |
+| host-C-2 | | eth1      | | 10.0.80.1/30      | | C      |
+| router-2 | | eth1      | | 10.0.80.2/30      | | C      |
+| router-1 | | eth2      | | 172.16.255.253/30 | | D      |
+| router-2 | | eth2      | | 172.16.255.254/30 | | D      |
 
 
 ### Vagrant file and provisioning scripts
@@ -265,7 +262,7 @@ Lastly the configuration of Docker to create a webserver based on Nginx and a we
     echo "<html>
     <head><title>DNCS ASSIGNMENT</title></head>
     <body>
-    <p>So long, and thanks for all the fish.<p>
+    <p>If you are reading this, you and I have done everything correctly<p>
     </body>
     </html>" > ~/docker-nginx/html/index.html
     docker run --name docker-nginx -p 80:80 -d -v ~/docker-nginx/html:/usr/share/nginx/html nginx
@@ -274,7 +271,8 @@ Lastly the configuration of Docker to create a webserver based on Nginx and a we
 
 ## First start
 
--   Install Virtualbox and Vagrant
+-   Install Virtualbox 
+-   Install Vagrant
 -   Open the terminal and execute the command: `git clone https://github.com/Mattemn97/dncs-lab`
 -   You should be able to launch the lab from within the cloned repo folder.
   ```
@@ -321,4 +319,3 @@ and vice versa:
   ```bash
     vagrant@host-B-1: curl 10.0.80.1
   ```
-  >>>>>>>
