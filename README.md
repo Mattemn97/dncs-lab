@@ -166,12 +166,12 @@ This code will execute the provisioning script named "router-1.sh"
 
 The following lines are used to configure a trunk port for the VLAN:
   ```bash
-    ip link add link eth1 name eth1.10 type vlan id 10
+    ip link add link eth1 name eth1.50 type vlan id 50
     ip link add link eth1 name eth1.20 type vlan id 20
   ```
 Then is possible to assign IP addresses:
   ```bash
-    ip addr add 10.0.10.254/24 dev eth1.10
+    ip addr add 10.0.50.254/24 dev eth1.50
     ip addr add 10.0.20.30/27 dev eth1.20
     ip addr add 172.16.255.253/30 dev eth2
   ```
@@ -201,7 +201,7 @@ This code will execute the provisioning script named "router-2.sh"
 
 The following lines are used to configure IP addresses:
   ```bash
-    ip addr add 10.0.30.2/30 dev eth1
+    ip addr add 10.0.80.2/30 dev eth1
     ip addr add 172.16.255.254/30 dev eth2
   ```
 Then the IP forwarding using OSPF
@@ -233,7 +233,7 @@ The following lines are used to set up a bridge (named switch) and add the inter
   ```bash
     ovs-vsctl add-br switch
     ovs-vsctl add-port switch eth1
-    ovs-vsctl add-port switch eth2 tag=10
+    ovs-vsctl add-port switch eth2 tag=50
     ovs-vsctl add-port switch eth3 tag=20
   ```
 Then the last command to set up ovs-system:
@@ -245,22 +245,22 @@ Then the last command to set up ovs-system:
 
 Host A is a VM based on Trusty64. Here the code used in the Vagrantfile to create the VM with one interface, connected to the _switch_.
   ```ruby
-    config.vm.define "host-1-a" do |hosta|
+    config.vm.define "host-A-1" do |hosta|
       hosta.vm.box = "minimal/trusty64"
-      hosta.vm.hostname = "host-1-a"
+      hosta.vm.hostname = "host-A-1"
       hosta.vm.network "private_network", virtualbox__intnet: "broadcast_host_a", auto_config: false
-      hosta.vm.provision "shell", path: "host-1-a.sh"
+      hosta.vm.provision "shell", path: "host-A-1.sh"
     end
   ```
-This code will execute the provisioning script named "host-1-a.sh"
+This code will execute the provisioning script named "host-A-1.sh"
 
 The following line is used to configure the IP address on _eth1_:
   ```bash
-    ip addr add 10.0.10.1/24 dev eth1
+    ip addr add 10.0.50.1/24 dev eth1
   ```
 Then is possible to set a static route to _router-1_:
   ```bash
-    ip route add 10.0.0.0/8 via 10.0.10.254
+    ip route add 10.0.0.0/8 via 10.0.50.254
   ```
 
 
@@ -268,14 +268,14 @@ Then is possible to set a static route to _router-1_:
 
 Host B is a VM based on Trusty64. Here the code used in the Vagrantfile to create the VM with one interface, connected to the _switch_.
   ```ruby
-    config.vm.define "host-1-b" do |hostb|
+    config.vm.define "host-B-1" do |hostb|
       hostb.vm.box = "minimal/trusty64"
-      hostb.vm.hostname = "host-1-b"
+      hostb.vm.hostname = "host-B-1"
       hostb.vm.network "private_network", virtualbox__intnet: "broadcast_host_b", auto_config: false
-      hostb.vm.provision "shell", path: "host-1-b.sh"
+      hostb.vm.provision "shell", path: "host-B-1.sh"
     end
   ```
-This code will execute the provisioning script named "host-1-b.sh"
+This code will execute the provisioning script named "host-B-1.sh"
 
 The following line is used to configure the IP address on _eth1_:
   ```bash
@@ -290,22 +290,22 @@ Then is possible to set a static route to _router-1_:
 
 Host C is a VM based on Xenial64. Here the code used in the Vagrantfile to create the VM with one interface, connected to the _router-2_.
   ```ruby
-    config.vm.define "host-2-c" do |hostc|
+    config.vm.define "host-C-2" do |hostc|
       hostc.vm.box = "ubuntu/xenial64"
-      hostc.vm.hostname = "host-2-c"
+      hostc.vm.hostname = "host-C-2"
       hostc.vm.network "private_network", virtualbox__intnet: "broadcast_router-south-2", auto_config: false
-      hostc.vm.provision "shell", path: "host-2-c.sh"
+      hostc.vm.provision "shell", path: "host-C-2.sh"
     end
   ```
-This code will execute the provisioning script named "host-2-c.sh"
+This code will execute the provisioning script named "host-C-2.sh"
 
 The following line is used to configure the IP address on _enp0s8_:
   ```bash
-    ip addr add 10.0.30.1/30 dev enp0s8
+    ip addr add 10.0.80.1/30 dev enp0s8
   ```
 Then is possible to set a static route to _router-2_:
   ```bash
-    ip route add 10.0.0.0/8 via 10.0.30.2
+    ip route add 10.0.0.0/8 via 10.0.80.2
   ```
 Lastly the configuration of Docker to create a webserver based on Nginx and a webpage located in _/docker-nginx/html_ directory.
   ```bash
@@ -314,7 +314,7 @@ Lastly the configuration of Docker to create a webserver based on Nginx and a we
     echo "<html>
     <head><title>DNCS ASSIGNMENT</title></head>
     <body>
-    <p>So long, and thanks for all the fish.<p>
+    <p>If you are reading this. We have done all correctly.<p>
     </body>
     </html>" > ~/docker-nginx/html/index.html
     docker run --name docker-nginx -p 80:80 -d -v ~/docker-nginx/html:/usr/share/nginx/html nginx
