@@ -17,7 +17,7 @@ mkdir -p ~/docker-nginx/html
 echo "<html>
 <head><title>DNCS ASSIGNMENT</title></head>
 <body>
-<p>So long, and thanks for all the fish.<p>
+<p>If you are reading this. We have done all correctly.<p>
 </body>
 </html>" > ~/docker-nginx/html/index.html
 docker run --name docker-nginx -p 80:80 -d -v ~/docker-nginx/html:/usr/share/nginx/html nginx
